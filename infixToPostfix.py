@@ -19,32 +19,39 @@ def prec(c):
 # Function to perform infix to postfix conversion
 def infixToPostfix(s):
     st = []
-    result = ""
+    result = []
+    i = 0
 
-    for i in range(len(s)):
+    while i < len(s):
         c = s[i]
 
-        if (c >= '0' and c <= '9'):
-            result += c
+        if c.isdigit():
+            num = c
+            while s[i + 1].isdigit(): #i + 1 < len(s) and
+                i += 1
+                num += s[i]
+            result.append(num)
 
         elif c == '(':
             st.append('(')
 
+
         elif c == ')':
-            while st[-1] != '(':
-                result += st.pop()
+            while st and st[-1] != '(':
+                result.append(st.pop())
             st.pop()
 
         else:
             while st and (prec(c) < prec(st[-1]) or prec(c) == prec(st[-1])): #if operator is smaller or equal in order
-                result += st.pop()
+                result.append(st.pop())
             st.append(c)
+        i += 1
 
     while st:
-        result += st.pop()
+        result.append(st.pop())
 
     return result
 
 
-exp = "2+(4@2-8)"
-print(infixToPostfix(exp))
+exp = "2+(4@2-800)"
+print(infixToPostfix(["4","@","(", "-", "2", "@","2",")"]))
