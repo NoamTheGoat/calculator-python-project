@@ -54,4 +54,4 @@ def infixToPostfix(s):
 
 
 exp = "2+(4@2-800)"
-print(infixToPostfix(["4","@","(", "-", "2", "@","2",")"]))
+print(infixToPostfix(["4","@","(", "-", "2", "2", "@","2",")"]))
